@@ -123,7 +123,7 @@ module EasyRoles
     if match && respond_to?('has_role?')
       true
     else
-      respond_to_without_roles?(method_id, include_private = false)
+      respond_to_without_roles?(method_id, include_private)
     end
   end
 end
