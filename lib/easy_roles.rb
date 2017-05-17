@@ -2,19 +2,11 @@ require 'active_support'
 
 module EasyRoles
   extend ActiveSupport::Concern
-  
-  included do |base|
-    base.send :alias_method_chain, :method_missing, :roles
-    base.send :alias_method_chain, :respond_to?, :roles
-  end
 
-  ALLOWED_METHODS = [:serialize, :bitmask]
-  
-  ALLOWED_METHODS.each do |method|
-    autoload method.to_s.capitalize.to_sym, "methods/#{method}"
-  end
-  
-  module ClassMethods
+  ALLOWED_METHODS = %i[serialize bitmask].freeze
+  ALLOWED_METHODS.each { |m| autoload m.to_s.capitalize.to_sym, "methods/#{m}" }
+
+  class_methods do
     def easy_roles(name, options = {})
       begin
         raise NameError unless ALLOWED_METHODS.include? options[:method]
@@ -25,30 +17,27 @@ module EasyRoles
       "EasyRoles::#{options[:method].to_s.camelize}".constantize.new(self, name, options)
     end
   end
-  
-  def method_missing_with_roles(method_id, *args, &block)
+
+  def respond_to_missing?(method_id, *args, &block)
     match = method_id.to_s.match(/^is_(\w+)[?]$/)
     if match && respond_to?('has_role?')
       self.class.send(:define_method, "is_#{match[1]}?") do
-        send :has_role?, "#{match[1]}"
+        send :has_role?, match[1].to_s
       end
       send "is_#{match[1]}?"
     else
-      method_missing_without_roles(method_id, *args, &block)
+      super(method_id, *args, &block)
     end
   end
-  
-  def respond_to_with_roles?(method_id, include_private = false)
+
+  def respond_to?(method_id, include_private = false)
     match = method_id.to_s.match(/^is_(\w+)[?]$/)
     if match && respond_to?('has_role?')
       true
     else
-      respond_to_without_roles?(method_id, include_private = false)
+      super(method_id, include_private)
     end
   end
 end
 
-class ActiveRecord::Base
-  include EasyRoles
-end
-
+ActiveRecord::Base.prepend EasyRoles
