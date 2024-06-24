@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    easy_roles (2.0.1)
+    easy_roles (2.0.2)
       activesupport
 
 GEM
