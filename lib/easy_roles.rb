@@ -1,8 +1,11 @@
 module EasyRoles
   def self.included(base)
     base.extend ClassMethods
-    base.send :alias_method_chain, :method_missing, :roles
-    base.send :alias_method_chain, :respond_to?, :roles
+    base.alias_method :method_missing_without_roles, :method_missing
+    base.alias_method :method_missing, :method_missing_with_roles
+
+    base.alias_method :respond_to_without_roles?, :respond_to?
+    base.alias_method :respond_to?, :respond_to_with_roles?
   end
   
   module ClassMethods
@@ -118,7 +121,7 @@ module EasyRoles
     end
   end
   
-  def respond_to_with_roles?(method_id, include_private = false)
+  def respond_to_with_roles?(method_id, include_private)
     match = method_id.to_s.match(/^is_(\w+)[?]$/)
     if match && respond_to?('has_role?')
       true
