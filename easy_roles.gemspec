@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = %q{Easy role authorization in rails}
   s.email = %q{ryan@platform45.com}
   s.extra_rdoc_files = [%q{CHANGELOG.rdoc}, %q{README.rdoc}, %q{lib/easy_roles.rb}, %q{lib/generators/active_record/easy_roles_generator.rb}, %q{lib/generators/active_record/templates/migration_bitmask.rb}, %q{lib/generators/active_record/templates/migration_non_bitmask.rb}, %q{lib/generators/easy_roles/easy_roles_generator.rb}, %q{lib/generators/templates/README}]
-  s.files = [%q{CHANGELOG.rdoc}, %q{Gemfile}, %q{Gemfile.lock}, %q{README.rdoc}, %q{Rakefile}, %q{easy_roles.gemspec}, %q{init.rb}, %q{lib/easy_roles.rb}, %q{lib/generators/active_record/easy_roles_generator.rb}, %q{lib/generators/active_record/templates/migration_bitmask.rb}, %q{lib/generators/active_record/templates/migration_non_bitmask.rb}, %q{lib/generators/easy_roles/easy_roles_generator.rb}, %q{lib/generators/templates/README}, %q{spec/easy_roles_spec.rb}, %q{spec/spec_helper.rb}, %q{Manifest}]
+  s.files = [%q{CHANGELOG.rdoc}, %q{Gemfile}, %q{Gemfile.lock}, %q{README.rdoc}, %q{Rakefile}, %q{easy_roles.gemspec}, %q{init.rb}, %q{lib/easy_roles.rb}, %q{lib/generators/active_record/easy_roles_generator.rb}, %q{lib/generators/active_record/templates/migration_bitmask.rb}, %q{lib/generators/active_record/templates/migration_non_bitmask.rb}, %q{lib/generators/easy_roles/easy_roles_generator.rb}, %q{lib/generators/templates/README}, %q{spec/easy_roles_spec.rb}, %q{spec/spec_helper.rb}]
   s.homepage = %q{http://github.com/platform45/easy_roles}
   s.rdoc_options = [%q{--line-numbers}, %q{--inline-source}, %q{--title}, %q{Easy_roles}, %q{--main}, %q{README.rdoc}]
   s.require_paths = [%q{lib}]
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.2') then
       s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<activerecord>, [">= 0"])
-      s.add_development_dependency(%q<sqlite3>, [">= 0"])
+      s.add_development_dependency(%q<sqlite3>, '>= 1.4', '< 1.6.0')
     else
       s.add_dependency(%q<rspec>, [">= 0"])
       s.add_dependency(%q<activerecord>, [">= 0"])
