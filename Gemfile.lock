@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    easy_roles (1.2.0)
+    easy_roles (1.2.2)
 
 GEM
   remote: http://rubygems.org/
