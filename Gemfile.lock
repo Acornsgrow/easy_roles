@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    easy_roles (1.2.2)
+    easy_roles (1.2.3)
 
 GEM
   remote: http://rubygems.org/
@@ -43,4 +43,4 @@ DEPENDENCIES
   sqlite3 (>= 1.4, < 1.6.0)
 
 BUNDLED WITH
-   2.1.4
+   2.4.14
