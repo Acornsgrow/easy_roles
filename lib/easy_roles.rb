@@ -121,7 +121,7 @@ module EasyRoles
     end
   end
   
-  def respond_to_with_roles?(method_id, include_private)
+  def respond_to_with_roles?(method_id, include_private = false)
     match = method_id.to_s.match(/^is_(\w+)[?]$/)
     if match && respond_to?('has_role?')
       true
