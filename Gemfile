@@ -1,2 +1,2 @@
-source :rubygems
+source 'https://pkg.acorns.com/basic/ruby/ruby/'
 gemspec
